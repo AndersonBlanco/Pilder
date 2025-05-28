@@ -19,7 +19,6 @@ import { Provider, useSelector, useDispatch } from 'react-redux';
 import { getState, store } from './store';
 import { nav, selectNavigation, render } from './navigationSlice';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
- import { BLEService } from './ble';
 
 const Stack = createNativeStackNavigator(); 
  
