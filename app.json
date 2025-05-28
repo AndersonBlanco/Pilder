@@ -1,8 +1,39 @@
 {
   "expo": {
+    "newArchEnabled": true,
     "name": "Pilder",
     "slug": "Pilder",
-    "version": "1.0.0"
+    "version": "2.0.0",
+    "extra": {
+      "eas": {
+        "projectId": "2777fd1a-ac1b-4e2a-85b6-ddcc3a17f18b"
+      }
+    },
+    "icon": "./assets/icon.png",
+    "ios": {
+      "bundleIdentifier": "com.anderson913.pillpal",
+      "icon": "./assets/icon.png",
+      "splash": {
+        "image": "./assets/splash.png",
+        "resizeMode": "contain",
+        "backgroundColor": "#FFFFFF"
+      }
+    },
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#FFFFFF"
+    },
+    "plugins": [
+      [
+        "react-native-ble-plx",
+        {
+          "isBackgroundEnabled": true,
+          "modes": ["peripheral", "central"],
+          "bluetoothAlwaysPermission": "Allow $(PRODUCT_NAME) to connect to bluetooth devices"
+        }
+      ]
+    ]
   },
-  "name": "Pilder"
+  "name":"Pilder"
 }
