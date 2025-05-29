@@ -54,7 +54,7 @@ export default function Permissions({navigation}){
                 <MiniLogoSVG height = {50} style = {{position:"relaive", right: -width*.9}} />
             </View>
             <View style = {{paddingHorizontal: 10}}>
-                <TouchableOpacity style = {styles.backButton_Container} onPress={() => navigation.popTo("Settings")}><RightArrowSVG fill={"rgba(250, 84,84,1)"} style = {styles.rightArrow} /><Text style = {styles.backButton}>Back</Text></TouchableOpacity>
+                <TouchableOpacity style = {styles.backButton_Container} onPress={() => navigation.popTo("Settings")}><RightArrowSVG fill={"#475FD9"} style = {styles.rightArrow} /><Text style = {styles.backButton}>Back</Text></TouchableOpacity>
             </View>
             <View style = {styles.optionsGlobalContainer}>
             <List dictionary={permissions} />

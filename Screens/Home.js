@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     },
 
 addPillPal:{
-    backgroundColor: "rgba(250, 84,84,1)",
+    backgroundColor: "#5F76E9",
     paddingVertical: 10, 
     alignItems:"center",
     justifyContent:"center",

@@ -27,7 +27,7 @@ export default function AuthScreen(){
     let w = 64;
     const Intereactables = (
         <View style = {{top: -37, rowGap: 50}}>
-            <Text style = {{fontSize: 14, fontWeight: "300"}}>Forgot username or password? <TouchableOpacity><Text style = {{bottom: -5, color: "rgba(250, 84,84,1)", textDecorationLine: "underline", }}>Reset</Text></TouchableOpacity></Text>
+            <Text style = {{fontSize: 14, fontWeight: "300"}}>Forgot username or password? <TouchableOpacity><Text style = {{bottom: -5, color: "#475FD9", textDecorationLine: "underline", }}>Reset</Text></TouchableOpacity></Text>
            
             <View style = {[styles.row, {columnGap: 50, backgroundColor: "transparent", justifyContent:"center", }]}>
             <TouchableOpacity>
@@ -54,11 +54,11 @@ export default function AuthScreen(){
                 <TextInput placeholder="password" style={styles.textInput} placeholderTextColor={"rgba(0,0,0, .25)"}/>
             </TouchableOpacity>
 
-            <TouchableOpacity style = {styles.authButtons}>
+            <TouchableOpacity style = {styles.authButtons} onPress={() => dispatch(nav("IntroCustomization"))}>
                 <Text style = {styles.authButtons_text}>SignIn</Text>
             </TouchableOpacity>
 
-            <Text style = {{fontSize: 14, fontWeight: "300"}}>Dont have an account? <TouchableOpacity onPress={() => setAuthType(false)}><Text style = {{bottom: -5, color: "rgba(250, 84,84,1)", textDecorationLine: "underline", }}>SignUp</Text></TouchableOpacity></Text>
+            <Text style = {{fontSize: 14, fontWeight: "300"}}>Dont have an account? <TouchableOpacity onPress={() => setAuthType(false)}><Text style = {{bottom: -5, color: "#475FD9", textDecorationLine: "underline", }}>SignUp</Text></TouchableOpacity></Text>
             {Intereactables}
         
         </View>
@@ -83,7 +83,7 @@ export default function AuthScreen(){
                 <Text style = {styles.authButtons_text}>SignUp</Text>
             </TouchableOpacity>
 
-            <Text style = {{fontSize: 14, fontWeight: "300"}}>Already have an account? <TouchableOpacity onPress={() => setAuthType(true)}><Text style = {{bottom: -5, color: "rgba(250, 84,84,1)", textDecorationLine: "underline", }}>SignIn</Text></TouchableOpacity></Text>
+            <Text style = {{fontSize: 14, fontWeight: "300"}}>Already have an account? <TouchableOpacity onPress={() => setAuthType(true)}><Text style = {{bottom: -5, color: "#475FD9", textDecorationLine: "underline", }}>SignIn</Text></TouchableOpacity></Text>
             {Intereactables}
         </View>
     );
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
         fontSize: 15
     },
     authButtons:{
-        backgroundColor: "rgba(250,84,84,1)",
+        backgroundColor: "#475FD9",
         paddingVertical: 15,
         paddingHorizontal: 25,
         width: screenWidth * .65,

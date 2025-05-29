@@ -26,7 +26,7 @@ export default function IntroCustomization(){
     return(
       <>
             <TouchableOpacity onPress={() => dispatch(nav("Home"))} style = {{width: Dimensions.get("screen").width, position:"relative", left: Dimensions.get("screen").width * .85, top: -125}}>
-            <Text style = {{fontSize: 17, color: "rgba(250, 84,84,1)"}}>Next</Text> 
+            <Text style = {{fontSize: 17, color: "#475FD9"}}>Next</Text> 
             </TouchableOpacity>
 
        

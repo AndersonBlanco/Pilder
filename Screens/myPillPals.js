@@ -1,4 +1,4 @@
-import { ScrollView, FlatList, View, Text, Image, SafeAreaView, StyleSheet, ImageBackground, TextInput, TouchableOpacity, Button} from "react-native";
+import { ScrollView, FlatList, View, Text, SafeAreaView, StyleSheet, ImageBackground, TextInput, TouchableOpacity, Button, Modal, Alert} from "react-native";
 import { Dimensions } from "react-native";
 import Logo from "../assets/logo.png"; 
 import AppleLogo from "../assets/apple_logo.png";
@@ -8,41 +8,131 @@ import LogoSVG from "../assets/logo_svg";
 import BottomNav from "../components/BottomNav";
 import User from "../assets/user.png"; 
 import MiniLogoSVG from "../assets/miniLogo";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import SideMenu from "../components/sideMenu";
+import AnimatedProgressWheel from 'react-native-progress-wheel';
+import WeeklyTimerComponent from "../components/reminderPicker";
+import { selecMyPillPals, addPal, changePal } from "../myPillPalsSlice";
+
+ 
 export default function MyPillPals(){
+    const dispatch = useDispatch(); 
+    
+    const [editPal, setEditPal] = useState(false),
+        [selectedPal, setSelectedPal] = useState(null),
+        [editTimer, setEditTimer] = useState(false); 
+
+    const ChargeWheel = ({val, style})  =>{
+        return <View style = {style}><AnimatedProgressWheel
+        color={"#5F76E9"}
+        backgroundColor="#5F76E9"
+        width={5}
+        size={110}
+        animateFromValue={0}
+        progress={val}
+        showPercentageSymbol
+        showProgressLabel
+        rounded = {true}
+         
+        /></View>
+    }
+   
+
     const myPillPals_reduxState = useSelector((state) => state.myPillPals.value); 
 
     const Edit = ({action})=>{
         return <TouchableOpacity style = {styles.editContainer} onPress={action}><Text style = {styles.editText}>edit</Text></TouchableOpacity>
     }
+
+    const EditPal = (
+        <Modal visible = {editPal} transparent animationType="fade">
+            <View style = {{height: "100%", width:"100%", backgroundColor:"rgba(0,0,0, .25)",  textAlign:"center", alignItems:"center", justifyContent:"center",}}>
+             <View style = {[{ paddingVertical: 25,backgroundColor: "white", textAlign:"center", alignItems:"center", justifyContent:"center", borderRadius: 10, width: "80%", height: "auto"}]}>
+
+                <View style = {{backgroundColor:"transparent", width:"100%", alignItems:"flex-end", top: -22, paddingRight: 9,}}><Button title = "Close" onPress={() => setEditPal(!editPal)}/></View>
+
+                <View style = {[styles.column, {rowGap: 20}]}>
+                        <View style ={[styles.row, {columnGap: 12}]}><Text style = {styles.settingTitle}>Name:</Text><TextInput value = {selectedPal!= null? selectedPal['Name'] : ""} /><Edit/></View>
+                </View>
+
+             </View>
+            </View>
+        </Modal>
+    );
+
+    const EditTimer = (
+         <Modal visible = {editTimer} transparent animationType="fade">
+            <View style = {{height: "100%", width:"100%", backgroundColor:"rgb(255, 255, 255)",  textAlign:"center", alignItems:"center", justifyContent:"center", paddingTop: 75}}>
+            <WeeklyTimerComponent selectedPal_id = {selecMyPillPals['id']} setModal={setEditTimer} />
+            </View>
+        </Modal>
+    );
+    
     const ListPillPalss = ({dictionary}) =>{
         let ui = [];
        dictionary.map(i => 
             ui.push(
+
                 <View style = {styles.myPillPalContainer} key = {i.id}>
+                    <View style = {{   
+                        borderRadius: 15,
+                        width: Dimensions.get("screen").width*.925,
+                        backgroundColor:"rgba(0,0,0,.05)",
+                        paddingVertical: 25,
+                        alignItems:"center",
+                        justifyContent:"center",
+                        rowGap: 10
+                        }}>
 
-                <View style= {[styles.row, {columnGap: 265, width: Dimensions.get("screen").width}]}>
-                    <Text>{i["Name"]}</Text>
-                    <Text>{i['charge']}</Text>
-                </View>
 
-                <View style = {[styles.row, {justifyContent:"space-between", marginTop: 50}]}>
-                    <View style = {styles.column}>
-                        <View style ={[styles.row, {columnGap: 12}]}><Text style = {styles.settingTitle}>Timer</Text><Edit /></View>
-                        <View style ={[styles.row, {columnGap: 12}]}><Text style = {styles.settingTitle}>Haptics</Text><Edit/></View>
-                        <View style ={[styles.row, {columnGap: 12}]}><Text style = {styles.settingTitle}>Name</Text><Edit/></View>
-                    </View>
+                <View style = {[styles.row, {justifyContent:"space-around", marginTop: 15, backgroundColor:"transparent", columnGap: 75}]}>
 
-                    <View style ={[styles.column, {top: -27, alignItems:"stretch", justifyContent:"center", rowGap: 10 }]}>
+               
+ 
+                    <View style ={[styles.column, {top: -27, alignItems:"stretch", justifyContent:"center", rowGap: 0 }]}>
+                       
                         <MiniLogoSVG height = {100} width={75} /> 
-                        <TouchableOpacity style = {styles.findContainer}>
-                            <Text style = {styles.findText}>Find</Text>
-                        </TouchableOpacity>
+                        <Text style = {{position:"relative", bottom: 0, fontSize: 17}}>{i["Name"]}</Text>
+
                     </View>
+                    <ChargeWheel style = {{top: -10}} val = {(i['charge'])} />
+                </View>
+
+                   <TouchableOpacity style = {styles.findContainer} onPress={() =>{ 
+                    
+                    //setEditPal(!editPal); setSelectedPal(i);
+                    Alert.prompt("Edit Pilder Name", "", [
+                        {
+                            text:"Cancel",
+                            style:"destructive"
+                        },
+                        {
+                            text:"Done", 
+                            onPress: (txt) => dispatch(changePal({text: txt, id: i['id']}))
+                        },
+                    ])
+                    
+                    //tetsing POST-ing to sever
+
+                    /*
+                    fetch("http://192.168.56.1:3001/arduino?command=universe", {
+                     method: "GET",
+                    })
+                    .then((resp) =>resp.json())
+                    .then(data => console.log("Succeeded: ", data))
+                    .catch((err) => console.log("Error: ", err))
+                    /**/
+                   }}
+            
+                   >
+                            <Text style = {styles.findText}>Edit Name</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity style = {styles.findContainer} onPress={() =>{ setEditTimer(!editTimer); setSelectedPal(i); }}>
+                            <Text style = {styles.findText}>Edit Timer</Text>
+                        </TouchableOpacity>
 
                 </View>
-                
                 
             </View>
             )
@@ -55,28 +145,36 @@ export default function MyPillPals(){
     <>
   <SideMenu/>
       <ScrollView style = {styles.gllobalMyPillPalsSetts} showsVerticalScrollIndicator>
+       
         <ListPillPalss dictionary = {myPillPals_reduxState['pillPals']}/>
+        <View style = {{height: 25, backgroundColor:"transparent"}}/>
       </ScrollView>
 
-           
+           {EditPal}
+           {EditTimer}
+
        </>
     )
 }
 
 const styles = StyleSheet.create({
     gllobalMyPillPalsSetts:{
-        bottom: -45, 
-        rowGap: 10, 
+        bottom: -55, 
+        rowGap: 0, 
         backgroundColor:"transparent",
         maxHeight: Dimensions.get("screen").height * .89
     },
     myPillPalContainer:{
-        borderTopWidth: 1,
+        borderTopWidth: 0,
          borderTopColor: "rgba(0,0,0,.34)",
          display:"flex",
          flexDirection:"column",
          width: Dimensions.get("screen").width, 
-         paddingVertical: 25
+         paddingVertical: 20,
+         paddingHorizontal: 15,
+         alignItems:"center",
+         justifyContent:"center"
+         
     },
     row:{
         display:"flex",
@@ -88,17 +186,17 @@ const styles = StyleSheet.create({
         flexDirection:"column"
     },
     findContainer:{
-        backgroundColor:"rgb(250,84,84)",
+        backgroundColor:"#5F76E9",
         borderRadius: 100,
         paddingVertical: 10,
         textAlign:"center",
         alignItems:"center",
-
+        width: "90%"
          
     },
     findText:{
         color:"white",
-        fontSize: 10, 
+        fontSize: 12.5, 
 
     },
     settingTitle:{
