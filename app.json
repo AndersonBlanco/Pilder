@@ -24,16 +24,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#FFFFFF"
     },
-    "plugins": [
-      [
-        "react-native-ble-plx",
-        {
-          "isBackgroundEnabled": true,
-          "modes": ["peripheral", "central"],
-          "bluetoothAlwaysPermission": "Allow $(PRODUCT_NAME) to connect to bluetooth devices"
-        }
-      ]
-    ]
-  },
-  "name":"Pilder"
+    "plugins": [],
+    "android": {
+      "package": "com.anderson913.pillpal"
+    }
+  }
 }
