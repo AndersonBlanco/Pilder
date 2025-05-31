@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
-import { Button, SafeAreaView, SectionList, StyleSheet, Text, View, Animated} from 'react-native';
+import { Button, SafeAreaView, SectionList, StyleSheet, Text, View, Animated, Alert} from 'react-native';
 import {createStaticNavigation, NavigationContainer, DefaultTheme} from "@react-navigation/native"; 
 import {createNativeStackNavigator} from "@react-navigation/native-stack"; 
  
@@ -19,6 +19,9 @@ import { Provider, useSelector, useDispatch } from 'react-redux';
 import { getState, store } from './store';
 import { nav, selectNavigation, render } from './navigationSlice';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+
+//webview:
+ 
 
 const Stack = createNativeStackNavigator(); 
  
@@ -54,7 +57,7 @@ const userPillPals = {
 
 export default function App() {
 const navState = useSelector(selectNavigation);
-const dispatch = useDispatch(); 
+
 
 
 

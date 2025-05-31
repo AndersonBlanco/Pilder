@@ -6,7 +6,7 @@ import GoogleLogo from "../assets/google_logo.png";
 import { useState } from "react";
 import UploadSVG from "../assets/uploadSVG";
 import CameraSVG from "../assets/cameraSVG"; 
-import User from "../assets/user.png"; 
+import User from "../assets/profileImg.png"; 
 //redux
 import { Provider, useSelector, useDispatch } from 'react-redux';
 import { getState, store } from '../store';

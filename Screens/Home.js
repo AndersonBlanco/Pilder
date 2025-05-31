@@ -6,7 +6,7 @@ import GoogleLogo from "../assets/google_logo.png";
 import { useState } from "react";
 import LogoSVG from "../assets/logo_svg"; 
 import BottomNav from "../components/BottomNav";
-import User from "../assets/user.png"; 
+import User from "../assets/profileImg.png"; 
 import MiniLogoSVG from "../assets/miniLogo";
 import Modal from "react-native-modal"; 
 import DrawerLayout from 'react-native-gesture-handler/DrawerLayout';
@@ -43,12 +43,13 @@ const ListPillPals = ({dictionary}) =>{
  
     return(
     <>
-    <View style = {[styles.column, {rowGap: 100}]}>
-            <TouchableOpacity style = {{bottom: 50}}>
-                <Image source = {User} style = {{height: profileImgSize, width: profileImgSize}} />
+    <View style = {[styles.column, {rowGap: 0, marginBottom: 100}]}>
+            <TouchableOpacity style = {{bottom: 25}}>
+                <Image source = {User} style = {{height: profileImgSize, width: profileImgSize, borderRadius: 100}} />
             </TouchableOpacity>
-            <Text style = {{right: -10, top: -125}}>Username</Text>
+            <Text style = {{top: -10}}>Richard Gauss</Text>
        </View>
+
        <View style = {styles.globalPillPalContainer}>
        <ListPillPals dictionary={myPillPals_reduxState['pillPals']} />
         </View>

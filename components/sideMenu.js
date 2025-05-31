@@ -1,7 +1,7 @@
 import {View, ScrollView, Text, TouchableOpacity, Image, StyleSheet, Dimensions} from "react-native";
 import Modal from "react-native-modal"; 
 import { useState } from "react";
-import User from "../assets/user.png"; 
+import User from "../assets/profileImg.png"; 
 import MiniLogoSVG from "../assets/miniLogo";
 import { useDispatch } from "react-redux";
 import { nav } from "../navigationSlice";
@@ -29,7 +29,7 @@ export default function SideMenu(){
                      </ScrollView>
                      <View style = {[[styles.lineBreak, {top: -65, left: -15}]]}/>
                      <TouchableOpacity style = {{bottom: 50, flexDirection:"row", justifyContent:"center", alignItems:"center", columnGap: 15, display:"relative", left: -17 }}>
-                       <Image source = {User} style = {{height: profileImgSize*.5, width: profileImgSize*.5}} />
+                       <Image source = {User} style = {{ borderRadius: 100, height: profileImgSize*.5, width: profileImgSize*.5}} />
                        <Text style = {{fontSize: 12.5}}>My Profile</Text>
                    </TouchableOpacity>
                    </View>
