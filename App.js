@@ -57,17 +57,7 @@ const userPillPals = {
 
 export default function App() {
 const navState = useSelector(selectNavigation);
-const dispatch = useDispatch(); 
 
-const Web = () =>{
-  return(
-    <WebView
-    javaScriptEnabled= {true}
-    onMessage={(e)=> console.log(JSON.parse(e.nativeEvent.data))}
-    source = {{uri:`https://bletolink.netlify.app/`}}/>
-  );
-
-}
 
 
 
@@ -75,7 +65,6 @@ let currentId = navState.routes[navState.currentRoute].id;
   return (
     
     <SafeAreaView style = {styles.container}>
-      <Web/>
   
       {
         currentId == 0?

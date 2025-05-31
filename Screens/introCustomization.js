@@ -6,7 +6,7 @@ import GoogleLogo from "../assets/google_logo.png";
 import { useState } from "react";
 import UploadSVG from "../assets/uploadSVG";
 import CameraSVG from "../assets/cameraSVG"; 
-import User from "../assets/user.png"; 
+import User from "../assets/profileImg.png"; 
 //redux
 import { Provider, useSelector, useDispatch } from 'react-redux';
 import { getState, store } from '../store';
@@ -26,7 +26,7 @@ export default function IntroCustomization(){
     return(
       <>
             <TouchableOpacity onPress={() => dispatch(nav("Home"))} style = {{width: Dimensions.get("screen").width, position:"relative", left: Dimensions.get("screen").width * .85, top: -125}}>
-            <Text style = {{fontSize: 17, color: "rgba(250, 84,84,1)"}}>Next</Text> 
+            <Text style = {{fontSize: 17, color: "#475FD9"}}>Next</Text> 
             </TouchableOpacity>
 
        
