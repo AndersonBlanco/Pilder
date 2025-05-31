@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
-import { Button, SafeAreaView, SectionList, StyleSheet, Text, View, Animated} from 'react-native';
+import { Button, SafeAreaView, SectionList, StyleSheet, Text, View, Animated, Alert} from 'react-native';
 import {createStaticNavigation, NavigationContainer, DefaultTheme} from "@react-navigation/native"; 
 import {createNativeStackNavigator} from "@react-navigation/native-stack"; 
  
@@ -19,6 +19,9 @@ import { Provider, useSelector, useDispatch } from 'react-redux';
 import { getState, store } from './store';
 import { nav, selectNavigation, render } from './navigationSlice';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+
+//webview:
+import { WebView } from 'react-native-webview';
 
 const Stack = createNativeStackNavigator(); 
  
@@ -56,12 +59,23 @@ export default function App() {
 const navState = useSelector(selectNavigation);
 const dispatch = useDispatch(); 
 
+const Web = () =>{
+  return(
+    <WebView
+    javaScriptEnabled= {true}
+    onMessage={(e)=> console.log(JSON.parse(e.nativeEvent.data))}
+    source = {{uri:`https://bletolink.netlify.app/`}}/>
+  );
+
+}
+
 
 
 let currentId = navState.routes[navState.currentRoute].id; 
   return (
     
     <SafeAreaView style = {styles.container}>
+      <Web/>
   
       {
         currentId == 0?
