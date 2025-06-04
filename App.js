@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
-import { Button, SafeAreaView, SectionList, StyleSheet, Text, View, Animated, Alert} from 'react-native';
+import { Button, SafeAreaView, SectionList, StyleSheet, Text, View, Animated, Alert, Platform} from 'react-native';
 import {createStaticNavigation, NavigationContainer, DefaultTheme} from "@react-navigation/native"; 
 import {createNativeStackNavigator} from "@react-navigation/native-stack"; 
  
@@ -20,8 +20,7 @@ import { getState, store } from './store';
 import { nav, selectNavigation, render } from './navigationSlice';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
-//webview:
- 
+//import {WebView} from "react-native-webview";
 
 const Stack = createNativeStackNavigator(); 
  
@@ -33,26 +32,6 @@ const PreComponentize = (props) => {
   )
 }
 
-const userPillPals = {
-  "PillPal1": {
-      "charge": "x%",
-      "Timer": "00:01:00:00",
-      "Haptics": "Flash",
-      "Name": "PillPal1"
-  },
-  "PillPal2": {
-      "charge": "x%",
-      "Timer": "00:01:00:00",
-      "Haptics": "Flash",
-      "Name": "PillPal1"
-  },
-  "PillPal3": {
-      "charge": "x%",
-      "Timer": "00:01:00:00",
-      "Haptics": "Flash",
-      "Name": "PillPal1"
-  },
-};
 
 
 export default function App() {
